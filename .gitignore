@@ -1,6 +1,7 @@
 Debug/*
 .vs/*
 packages/*
+*/Debug
 
 *.sln
 *.json
