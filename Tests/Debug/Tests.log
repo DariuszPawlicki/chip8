@@ -1,0 +1,4 @@
+﻿  chip8_test.cpp
+C:\Users\Darek\source\repos\CHIP8\CHIP8\chip8.cpp(12,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Darek\source\repos\CHIP8\CHIP8\chip8.cpp(69,65): warning C4244: '=': conversion from 'std::streamoff' to 'uint16_t', possible loss of data
+  Tests.vcxproj -> C:\Users\Darek\source\repos\CHIP8\Debug\Tests.exe
