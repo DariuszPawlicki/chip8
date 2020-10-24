@@ -11,10 +11,10 @@ class Display
 		SDL_Texture* texture;
 		
 	public:
-		Display(const char* title, int width, int height);
+		Display(const char* title, int scale_factor);
 		~Display();
 
 		void draw(uint32_t *screen);
+		bool keypad_handler(uint8_t *keypad);
 
 };
-

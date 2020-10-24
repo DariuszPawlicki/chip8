@@ -429,7 +429,7 @@ void Chip8::op_Fx55() {
 
 	uint8_t x_reg = (this->opcode & 0x0F00) >> 8;
 
-	for (int i = 0; i < x_reg; i++) {
+	for (int i = 0; i <= x_reg; i++) {
 		this->memory[this->index + i] = this->v_registers[i];
 	}
 }
@@ -439,7 +439,7 @@ void Chip8::op_Fx65() {
 
 	uint8_t x_reg = (this->opcode & 0x0F00) >> 8;
 
-	for (int i = 0; i < x_reg; i++) {
+	for (int i = 0; i <= x_reg; i++) {
 		this->v_registers[i] = this->memory[this->index + i];
 	}
 }

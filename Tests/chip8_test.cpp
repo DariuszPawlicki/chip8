@@ -272,7 +272,30 @@ TEST_F(Chip8Test, Op8xy5WithoutCarryBit) {
 }
 
 
-TEST_F(Chip8Test, Opxy6) {
+TEST_F(Chip8Test, Fx33) {
 
-	
+	chip->opcode = 0xF433;
+	chip->v_registers[4] = 123;
+
+	chip->op_Fx33();
+
+	ASSERT_EQ(chip->memory[chip->index], 1);
+	ASSERT_EQ(chip->memory[chip->index + 1], 2);
+	ASSERT_EQ(chip->memory[chip->index + 2], 3);
+}
+
+
+TEST_F(Chip8Test, Fx55) {
+
+	for (int i = 0; i < 16; i++) {
+		chip->v_registers[i] = i + 1;
+	}
+
+	chip->opcode = 0xFF55;
+
+	chip->op_Fx55();
+
+	for (int i = 0; i < 16; i++) {
+		ASSERT_EQ(chip->memory[chip->index + i], i + 1);
+	}
 }
