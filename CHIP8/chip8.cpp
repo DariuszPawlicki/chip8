@@ -84,22 +84,26 @@ void Chip8::load_rom(std::string file_path) {
 
 
 void Chip8::op_00e0() {
+
 	memset(this->screen, 0, sizeof(this->screen));
 }
 
 
 void Chip8::op_00ee() {
+
 	this->sp--;
 	this->pc = this->stack[this->sp];
 }
 
 
 void Chip8::op_1nnn() {
+
 	this->pc = this->opcode & 0x0FFF;
 }
 
 
 void Chip8::op_2nnn() {
+
 	uint16_t address = this->opcode & 0x0FFF;
 
 	this->stack[this->sp] = this->pc;
@@ -286,9 +290,8 @@ void Chip8::op_Bnnn() {
 
 void Chip8::op_Cxkk() {
 
-	uint8_t x_reg = (this->opcode & 0x0F00) >> 2;
+	uint8_t x_reg = (this->opcode & 0x0F00) >> 8;
 	uint8_t kk_value = (this->opcode & 0x00FF);
-
 	uint8_t random_byte = rand() % 255;
 
 	this->v_registers[x_reg] = kk_value & random_byte;
@@ -327,9 +330,7 @@ void Chip8::op_Dxyn() {
 
 			mask /= 2;
 		}
-
 	}
-
 }
 
 
@@ -411,7 +412,6 @@ void Chip8::op_Fx33() {
 
 	uint8_t x_reg = (this->opcode & 0x0F00) >> 8;
 	uint8_t value = this->v_registers[x_reg];
-
 
 	this->memory[this->index + 2] = value % 10;
 

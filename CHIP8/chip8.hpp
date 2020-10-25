@@ -8,10 +8,12 @@
 
 class Chip8
 {
+
 	typedef void (Chip8::*FuncPtr)();
 
 
 	public:
+
 		static const uint16_t FONT_LOCATION_ADDRESS = 0x50;
 		static const uint16_t PROGRAM_START_ADDRESS = 0x200;
 
@@ -57,6 +59,7 @@ class Chip8
 		
 
 	public:
+
 		void load_rom(std::string file_path);
 
 		void op_00e0(); // Clear screen
