@@ -246,7 +246,7 @@ TEST_F(Chip8Test, Op8xy4WithoutCarryBit) {
 }
 
 
-TEST_F(Chip8Test, Op8xy5WithCarryBit) {
+TEST_F(Chip8Test, Op8xy5WithFlag) {
 
 	chip->opcode = 0x8455;
 	chip->v_registers[4] = 0xFF;
@@ -259,7 +259,7 @@ TEST_F(Chip8Test, Op8xy5WithCarryBit) {
 }
 
 
-TEST_F(Chip8Test, Op8xy5WithoutCarryBit) {
+TEST_F(Chip8Test, Op8xy5WithoutFlag) {
 
 	chip->opcode = 0x8455;
 	chip->v_registers[4] = 0x01;
@@ -269,6 +269,127 @@ TEST_F(Chip8Test, Op8xy5WithoutCarryBit) {
 
 	ASSERT_EQ(chip->v_registers[4], 2);
 	ASSERT_EQ(chip->v_registers[0xF], 0);
+}
+
+
+TEST_F(Chip8Test, Op8xy6WithFlag) {
+
+	chip->opcode = 0x8456;
+	chip->v_registers[4] = 33;
+
+	chip->op_8xy6();
+
+	ASSERT_EQ(chip->v_registers[0xF], 1);
+	ASSERT_EQ(chip->v_registers[4], 16);
+}
+
+
+TEST_F(Chip8Test, Op8xy6WithoutFlag) {
+
+	chip->opcode = 0x8456;
+	chip->v_registers[4] = 32;
+
+	chip->op_8xy6();
+
+	ASSERT_EQ(chip->v_registers[0xF], 0);
+	ASSERT_EQ(chip->v_registers[4], 16);
+}
+
+
+TEST_F(Chip8Test, Op8xy7WithFlag) {
+
+	chip->opcode = 0x8457;
+	chip->v_registers[4] = 10;
+	chip->v_registers[5] = 25;
+
+	chip->op_8xy7();
+
+	ASSERT_EQ(chip->v_registers[0xF], 1);
+	ASSERT_EQ(chip->v_registers[4], 15);
+}
+
+
+TEST_F(Chip8Test, Op8xy7WithoutFlag) {
+
+	chip->opcode = 0x8457;
+	chip->v_registers[4] = 25;
+	chip->v_registers[5] = 10;
+
+	chip->op_8xy7();
+
+	ASSERT_EQ(chip->v_registers[0xF], 0);
+	ASSERT_EQ(chip->v_registers[4], 241);
+}
+
+
+TEST_F(Chip8Test, Op8xyEWithFlag) {
+
+	chip->opcode = 0x845E;
+	chip->v_registers[4] = 130;
+
+	chip->op_8xyE();
+
+	ASSERT_EQ(chip->v_registers[0xF], 1);
+	ASSERT_EQ(chip->v_registers[4], 4);
+}
+
+
+TEST_F(Chip8Test, Op8xyEWithoutFlag) {
+
+	chip->opcode = 0x845E;
+	chip->v_registers[4] = 66;
+
+	chip->op_8xyE();
+
+	ASSERT_EQ(chip->v_registers[0xF], 0);
+	ASSERT_EQ(chip->v_registers[4], 132);
+}
+
+
+TEST_F(Chip8Test, Op9xy0NoInstructionSkip) {
+
+	chip->opcode = 0x9450;
+
+	chip->v_registers[4] = 10;
+	chip->v_registers[5] = 10;
+
+	chip->op_9xy0();
+
+	ASSERT_EQ(chip->pc, 0x200);
+}
+
+
+TEST_F(Chip8Test, Op9xy0SkipInstruction) {
+
+	chip->opcode = 0x9450;
+
+	chip->v_registers[4] = 10;
+	chip->v_registers[5] = 15;
+
+	chip->op_9xy0();
+
+	ASSERT_EQ(chip->pc, 0x202);
+}
+
+
+TEST_F(Chip8Test, OpAnnn) {
+
+	chip->opcode = 0xA123;
+
+	chip->op_Annn();
+
+	ASSERT_EQ(chip->index, 0x123);
+}
+
+
+TEST_F(Chip8Test, OpBnnn) {
+
+	chip->opcode = 0xB00F;
+	chip->v_registers[0] = 0x1;
+
+	chip->op_Bnnn();
+
+	ASSERT_EQ(chip->pc, 0x10);
 }
 
 

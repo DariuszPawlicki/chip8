@@ -8,9 +8,9 @@
 int main(int argc, char* argv[])
 {  
 
-    std::string rom_name = "";
-    float delay = 0;
-    int scale_factor = 0;
+    std::string rom_name;
+    float delay;
+    int scale_factor;
 
     if (argc == 4) {
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
         if (arg == "--help" || arg == "-h") {
 
-            std::cout << "\n    CHIP8 emu accepts three arguments to run: \n" << std::endl;
+            std::cout << "\n   CHIP8 emu accepts three arguments to run: \n" << std::endl;
             std::cout << "1. Name of the ROM - placed in ROMS directory - you want to run." << std::endl;
             std::cout << "   ROMS should have an .ch8 extension.\n" << std::endl;
             std::cout << "2. Delay in milliseconds you want to apply between each CPU cycle, different games on CHIP8 worked\n" 
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     }
 
     Chip8 platform;
-    Display display("CHIP8", 10);
+    Display display("Chip8", scale_factor);
 
     platform.load_rom("..\\ROMS\\" + rom_name + ".ch8");
       

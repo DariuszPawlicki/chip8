@@ -98,7 +98,7 @@ class Chip8
 		void op_8xy7(); // Set Vx = Vy - Vx if Vy > Vx then VF = 1 else 0
 
 		void op_8xyE(); // Set Vx = Vx SHL 1 - shift left 1 - if most-significant bit is 1 then VF = 1 else 0, then
-						// Vx *= 2
+						// Vx << 1
 
 		void op_9xy0(); // Skip next instruction if Vx != Vy
 
