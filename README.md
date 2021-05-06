@@ -1,6 +1,6 @@
 # chip8
 
-C++ implementation of CHIP8.
+C++ implementation of CHIP8.  
 Emulator is fully functional and can run any ROM.
 
 ## Requirements
