@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <string>
+#include <cstring>
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>
